@@ -1,0 +1,11 @@
+{
+  "Events": {
+    "dbConfig": {
+      "host": "localhost",
+      "usr": "eoren",
+      "pwd": "admin",
+      "dbName": "intel",
+      "numConnectionRetries": 5
+    }
+  }
+}

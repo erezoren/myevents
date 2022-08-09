@@ -1,0 +1,15 @@
+.calender-header {
+  margin-top: 2%;
+}
+
+.day:hover {
+  color: red;
+}
+
+/*
+Draggable Item
+ */
+
+#card-header{
+  font-weight: 500;
+}

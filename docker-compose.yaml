@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  events_mongodb:
+    image: mongo:5.0.5
+    restart: always
+    container_name: events_mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=12345
+    volumes:
+      - ./init-mongodb:/docker-entrypoint-initdb.d
+      - ./init-mongodb/data:/tmp/data
+    ports:
+      - '27017:27017'
+
+  myevents_app:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile
+      context: "./"
+    depends_on:
+      - events_mongodb
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    ports:
+      - '8080:8080'
+      - '3000:3000'
+    links:
+      - events_mongodb
