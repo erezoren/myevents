@@ -38,7 +38,8 @@ router.put(
         const event = await eventsRepository.updateEvent(body.id,
             body.startDate,
             body.endDate,
-            body.name)
+            body.name,
+            body.allDay);
         await res.json({result: event});
       } catch (ex) {
         res.json({errors: ex.toString()});

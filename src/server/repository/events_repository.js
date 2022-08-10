@@ -23,13 +23,14 @@ const addNewEvent = async (startDate, endDate, name,allDay) => {
   );
 }
 
-const updateEvent = async (id, startDate, endDate, name) => {
+const updateEvent = async (id, startDate, endDate, name,allDay) => {
   const filter = {_id: id};
   return Events.findOneAndUpdate(filter,
       {
         start: new Date(startDate),
         end: new Date(endDate),
-        name: name
+        name: name,
+        allDay:allDay
       }
   );
 }

@@ -48,7 +48,7 @@ export const UpdateEventModal = ({
                  Cancel
                </Button>,
                <Button type="primary" loading={updating}
-                       onClick={() => update(event.id)}
+                       onClick={() => update(event._id)}
                        disabled={updateDisabled()}>
                  Update
                </Button>,
