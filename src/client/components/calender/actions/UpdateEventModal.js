@@ -13,7 +13,7 @@ export const UpdateEventModal = ({
   isUpdateModalOpen,
   onEventUpdate
 }) => {
-  const [eventName, setEventName] = useState(event.content);
+  const [eventName, setEventName] = useState(event.name);
   const [eventStart, setEventStart] = useState(event.start);
   const [eventEnd, setEventEnd] = useState(event.end);
   const [updating, setUpdating] = useState(false);
