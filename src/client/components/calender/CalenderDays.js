@@ -19,8 +19,12 @@ export const CalenderDays = ({startDate, endDate, events,onEventUpdate}) => {
       if(isUndefined(aggregatedEventsMap)){
         aggregatedEventsMap={};
       }
-      aggregatedEventsMap[resetDateToDayBeginning(
-          new Date(clonedEvent.start)).toDateString()].push(e);
+    let entry = resetDateToDayBeginning(
+        new Date(clonedEvent.start)).toDateString();
+      if(aggregatedEventsMap[entry]){
+        aggregatedEventsMap[entry].push(e);
+      }
+
     })
     return aggregatedEventsMap;
   }
