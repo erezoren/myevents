@@ -1,7 +1,7 @@
 {
   "Events": {
     "dbConfig": {
-      "host": "localhost",
+      "host": "events_mongodb",
       "usr": "root",
       "pwd": "12345",
       "dbName": "admin",

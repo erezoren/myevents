@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
-
+  console.log(process.env.NODE_ENV)
   connectMongodb(eventsDbConfig).then(() => {
     console.info("Events Mongodb connected");
   });

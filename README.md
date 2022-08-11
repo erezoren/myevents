@@ -15,10 +15,9 @@ Is still not working as expected and need to be fixed.
 ## Run from dev environment:
 - Clone the project from git.
 - Move to project root
-- In the command line run `docker-compose up events_mongodb` start containers.
-- Move back to application directory (`cd ..`)
+- In the command line run `docker-compose up events_mongodb` to start mongo container.
 - In the command line run `yarn` to install dependencies.
-- Launch client and server by executing `yarn run dev`
+- Launch client and server by executing `yarn dev`
 
 ### Run fully Dockerized application
 from the application root execute:
@@ -26,8 +25,14 @@ from the application root execute:
 docker-compose up --build
 ```
 
-in your browser go to:
+once container is up and running, in your browser go to:
 http://localhost:3000/
+
+stop dockerized application
+
+```shell
+docker-compose down -v
+```
 
 Stop all docker containers
 ```shell
