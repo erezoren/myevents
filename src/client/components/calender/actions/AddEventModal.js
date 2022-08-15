@@ -16,7 +16,6 @@ export const AddEventModal = ({addModalOpen, isAddModalOpen, onAddEvent}) => {
   const [eventStart, setEventStart] = useState();
   const [eventEnd, setEventEnd] = useState();
   const [adding, setAdding] = useState(false);
-
   async function callService(start, end, name) {
     await createNewEvent(start, end, name)
     .catch((e) => {

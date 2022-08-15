@@ -2,6 +2,18 @@ let express = require('express');
 const eventsRepository = require('../repository/events_repository')
 let router = express.Router();
 
+
+router.get('/find_all',
+    async (req, res) => {
+      try {
+        const events = await eventsRepository.findAllEvents();
+        await res.json({result: events});
+      } catch (ex) {
+        res.json({errors: ex.toString()});
+      }
+
+    });
+
 router.get('/find_by_range/start/:start/end/:end',
     async (req, res) => {
       try {
@@ -34,12 +46,29 @@ router.put(
     '/update_event',
     async (req, res) => {
       try {
+        debugger
         let body = req.body;
         const event = await eventsRepository.updateEvent(body.id,
             body.startDate,
             body.endDate,
             body.name,
             body.allDay);
+        await res.json({result: event});
+      } catch (ex) {
+        res.json({errors: ex.toString()});
+      }
+    }
+);
+
+router.put(
+    '/update_event_range',
+    async (req, res) => {
+      try {
+        let body = req.body;
+        debugger
+        const event = await eventsRepository.updateEventRange(body.id,
+            body.startDate,
+            body.endDate);
         await res.json({result: event});
       } catch (ex) {
         res.json({errors: ex.toString()});
