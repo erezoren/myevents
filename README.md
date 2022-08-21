@@ -1,4 +1,4 @@
-# my-calender
+# my-calendar
 ### Overview
 * This application is a simple client-server events manager with 2 modes:
   * New Calendar (default) - using  [react-big-calender](https://www.npmjs.com/package/react-big-calendar).
