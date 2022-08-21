@@ -1,17 +1,23 @@
 # my-calender
 ### Overview
-* This application is a simple client-server events manager
-* Events can be added and updated.
+* This application is a simple client-server events manager with 2 modes:
+  * New Calendar (default) - using  [react-big-calender](https://www.npmjs.com/package/react-big-calendar).
+  * Old Calendar - using my own controller for displaying events.
+* In both calenders Events can be added and updated.
+  * To add a new event click and drag over the timeframe you want. then enter the event title and click 'OK'.
+  * To Update an event timeframe click the event bottom and drag.
+  * TO update an event title click the event body once, change the title in the opened modal and click 'Update'
 * Events data is persisted to a local contained MongoDB with one collection called 'events'.
-* Events Are draggable and droppable, though this feature (using react-beautiful-dnd by Atlassian)
-Is still not working as expected and need to be fixed.
 
+### HOWTO
+* To add a new event in the new calendar either click on the calendar and drag through the timeframe you want, or use the Add EVent button.
 
 
 ### Assumptions
 - node 16 or higher installed.
 - docker installed.
 - yarn installed
+
 ## Run from dev environment:
 - Clone the project from git.
 - Move to project root

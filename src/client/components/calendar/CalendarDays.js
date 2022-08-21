@@ -5,7 +5,7 @@ import date from 'date-and-time';
 import {isUndefined} from 'lodash'
 import {resetDateToDayBeginning} from "../common/utils";
 
-export const CalenderDays = ({startDate, endDate, events,onEventUpdate}) => {
+export const CalendarDays = ({startDate, endDate, events,onEventUpdate}) => {
   const [datedEvents, setDatedEvents] = useState({});
 
   const cloneAndAggregateEvents = () => {
