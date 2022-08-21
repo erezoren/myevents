@@ -132,7 +132,7 @@ export const Calendar2 = () => {
         <div className="App">
           <DnDCalendar
               defaultDate={moment().toDate()}
-              defaultView={Views.DAY}
+              defaultView={localStorage.getItem("cal-view") || Views.DAY}
               events={events}
               localizer={localizer}
               onEventDrop={moveEvent}
@@ -143,6 +143,9 @@ export const Calendar2 = () => {
               resizable
               selectable
               style={{height: "100vh"}}
+              onView={(view) => {
+                localStorage.setItem("cal-view", view)
+              }}
           />
         </div>
 
