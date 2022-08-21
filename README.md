@@ -6,7 +6,7 @@
 * In both calenders Events can be added and updated.
   * To add a new event click and drag over the timeframe you want. then enter the event title and click 'OK'.
   * To Update an event timeframe click the event bottom and drag.
-  * TO update an event title click the event body once, change the title in the opened modal and click 'Update'
+  * To update an event title click the event body once, change the title in the opened modal and click 'Update'
 * Events data is persisted to a local contained MongoDB with one collection called 'events'.
 
 ### HOWTO
