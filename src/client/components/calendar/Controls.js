@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Button, Radio, Space} from 'antd';
 import 'antd/dist/antd.css'
 import {LeftOutlined, RightOutlined} from "@ant-design/icons";
-import {AddEventModal} from "./actions/AddEventModal";
+import {AddEventModal} from "../actions/AddEventModal";
 import {calculateDaysDiff} from "../common/utils";
 
 export const Controls = ({

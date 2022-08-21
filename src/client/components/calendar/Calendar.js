@@ -3,8 +3,8 @@ import {Header} from "./Header";
 import {DisplayMode} from "../common/app_constants";
 import date from 'date-and-time';
 
-import '../../style/Calender.css';
-import {CalenderDays} from "./CalenderDays";
+import '../../style/Calendar.css';
+import {CalendarDays} from "./CalendarDays";
 import {getEventsByStartDateAndDisplayModeDate} from "../services/events_service";
 import {
   calcEndDateByStartDateAndDisplayMode,
@@ -15,7 +15,7 @@ import {
 } from "../common/utils";
 import {Spin} from "antd";
 
-export const Calender = () => {
+export const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState();
 
@@ -57,12 +57,12 @@ export const Calender = () => {
         />
         <hr/>
         {loading && <Spin size="large"/>}
-        {!loading && <CalenderDays startDate={startDate} endDate={endDate}
+        {!loading && <CalendarDays startDate={startDate} endDate={endDate}
                                    events={events}
-                                   onEventUpdate={(newEventStartDate) =>
+                                   onEventUpdate={(updateResponse) =>
                                        setStartDate(date.addDays(startDate,
                                            calculateDaysDiff(startDate,
-                                               newEventStartDate))
+                                               updateResponse.start))
                                        )}/>}
       </>
   )

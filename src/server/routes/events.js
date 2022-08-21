@@ -33,7 +33,7 @@ router.post(
         let body = req.body;
         const event = await eventsRepository.addNewEvent(body.startDate,
             body.endDate,
-            body.name,
+            body.title,
             body.allDay);
         await res.json({result: event});
       } catch (ex) {
@@ -46,12 +46,11 @@ router.put(
     '/update_event',
     async (req, res) => {
       try {
-        debugger
         let body = req.body;
         const event = await eventsRepository.updateEvent(body.id,
             body.startDate,
             body.endDate,
-            body.name,
+            body.title,
             body.allDay);
         await res.json({result: event});
       } catch (ex) {
@@ -65,7 +64,6 @@ router.put(
     async (req, res) => {
       try {
         let body = req.body;
-        debugger
         const event = await eventsRepository.updateEventRange(body.id,
             body.startDate,
             body.endDate);

@@ -4,7 +4,7 @@ const eventsSchema = new mongoose.Schema({
   start: {type: Date, required: true},
   end: {type: Date, required: true},
   allDay: {type: Boolean, default: false},
-  name: {type: String, required: false}
+  title: {type: String, required: false}
 });
 
 module.exports = mongoose.model('Events', eventsSchema);

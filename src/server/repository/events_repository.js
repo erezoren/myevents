@@ -17,30 +17,29 @@ const findEventsByDateRange = async (startDate, endDate) => {
   });
 }
 
-const addNewEvent = async (startDate, endDate, name,allDay) => {
+const addNewEvent = async (startDate, endDate, title,allDay) => {
   return Events.insertMany([{
         start: new Date(startDate),
         end: new Date(endDate),
-        name: name,
+        title: title,
         allDay:allDay
       }]
   );
 }
 
-const updateEvent = async (id, startDate, endDate, name,allDay) => {
+const updateEvent = async (id, startDate, endDate, title,allDay) => {
   const filter = {_id: id};
   return Events.findOneAndUpdate(filter,
       {
         start: new Date(startDate),
         end: new Date(endDate),
-        name: name,
+        title: title,
         allDay:allDay
       }
   );
 }
 
 const updateEventRange = async (id, startDate, endDate) => {
-  debugger
   const filter = {_id: id};
   return Events.findOneAndUpdate(filter,
       {

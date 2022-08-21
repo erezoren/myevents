@@ -1,23 +1,23 @@
 import React, {useState} from "react";
 import {Button, DatePicker, Divider, Input, Modal, Space} from 'antd';
 import {isEmpty, isNull, isUndefined} from "lodash";
-import {createNewEvent} from "../../services/events_service";
+import {createNewEvent} from "../services/events_service";
 import {
   errAlert,
   resetDateToDayBeginning,
   resetDateToDayEnd
-} from "../../common/utils";
+} from "../common/utils";
 import date from "date-and-time";
 
 const {RangePicker} = DatePicker;
 
 export const AddEventModal = ({addModalOpen, isAddModalOpen, onAddEvent}) => {
-  const [eventName, setEventName] = useState();
+  const [eventTitle, setEventTitle] = useState();
   const [eventStart, setEventStart] = useState();
   const [eventEnd, setEventEnd] = useState();
   const [adding, setAdding] = useState(false);
-  async function callService(start, end, name) {
-    await createNewEvent(start, end, name)
+  async function callService(start, end, title) {
+    await createNewEvent(start, end, title)
     .catch((e) => {
       errAlert(e.toString());
     });
@@ -26,19 +26,19 @@ export const AddEventModal = ({addModalOpen, isAddModalOpen, onAddEvent}) => {
   const addEvent = async () => {
     setAdding(true);
     if (date.isSameDay(eventStart, eventEnd)) {
-      await callService(eventStart, eventEnd, eventName);
+      await callService(eventStart, eventEnd, eventTitle);
     } else {
       let eventStartCopy = new Date(eventStart);
       for (let dayOfPeriod = eventStartCopy;
           dayOfPeriod <= eventEnd;
           dayOfPeriod = date.addDays(dayOfPeriod, 1)) {
         await callService(eventStartCopy, resetDateToDayEnd(dayOfPeriod),
-            eventName);
+            eventTitle);
         eventStartCopy = resetDateToDayBeginning(
             date.addDays(eventStartCopy, 1));
 
       }
-      await callService(eventStartCopy, eventEnd, eventName);
+      await callService(eventStartCopy, eventEnd, eventTitle);
     }
 
     setAdding(false);
@@ -52,7 +52,7 @@ export const AddEventModal = ({addModalOpen, isAddModalOpen, onAddEvent}) => {
   }
 
   function addDisabled() {
-    return isEmpty(eventName) || isUndefined(eventStart)
+    return isEmpty(eventTitle) || isUndefined(eventStart)
         || isUndefined(
             eventEnd);
   }
@@ -74,7 +74,7 @@ export const AddEventModal = ({addModalOpen, isAddModalOpen, onAddEvent}) => {
           <RangePicker showTime onChange={(e) => updateRange(e)}/>
           <Divider plain/>
           <Input placeholder="Event description"
-                 onChange={(e) => setEventName(e.target.value)}/>
+                 onChange={(e) => setEventTitle(e.target.value)}/>
         </Space>
       </Modal>
 

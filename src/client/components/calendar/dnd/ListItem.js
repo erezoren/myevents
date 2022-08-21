@@ -4,7 +4,7 @@ import styled from "styled-components";
 import date from 'date-and-time';
 import {Button, Card, Tooltip} from "antd";
 import {ClockCircleOutlined} from "@ant-design/icons";
-import {UpdateEventModal} from "../actions/UpdateEventModal";
+import {UpdateEventModal} from "../../actions/UpdateEventModal";
 
 const DragItem = styled.div`
   padding: 10px;
@@ -65,7 +65,7 @@ export const ListItem = ({eventItem, index,onEventUpdate}) => {
                         </Tooltip>
                       ]}
                   >
-                    <span>{eventItem.name}</span>
+                    <span>{eventItem.title}</span>
                   </Card>
 
                 </DragItem>
@@ -75,6 +75,7 @@ export const ListItem = ({eventItem, index,onEventUpdate}) => {
         <UpdateEventModal event={eventItem}
                           isUpdateModalOpen={isUpdateModalOpen}
                           updateModalOpen={updateModalOpen}
+                          showRange={true}
                           onEventUpdate={onEventUpdate}
         />
       </div>

@@ -1,9 +1,9 @@
 import {Button, DatePicker, Divider, Input, Modal, Space} from 'antd';
-import React, {useState} from "react";
-import {updateEvent} from "../../services/events_service";
+import React, {useEffect, useState} from "react";
+import {updateEvent} from "../services/events_service";
 import {isEmpty, isNull, isUndefined} from "lodash";
 import moment from 'moment';
-import {errAlert} from "../../common/utils";
+import {errAlert} from "../common/utils";
 
 const {RangePicker} = DatePicker;
 
@@ -11,27 +11,38 @@ export const UpdateEventModal = ({
   event,
   updateModalOpen,
   isUpdateModalOpen,
-  onEventUpdate
+  onEventUpdate,
+  showRange
 }) => {
-  const [eventName, setEventName] = useState(event.name);
-  const [eventStart, setEventStart] = useState(event.start);
-  const [eventEnd, setEventEnd] = useState(event.end);
+  const [eventTitle, setEventTitle] = useState();
+  const [eventStart, setEventStart] = useState();
+  const [eventEnd, setEventEnd] = useState();
   const [updating, setUpdating] = useState(false);
   const dateFormat = 'YYYY-MM-DD HH:mm:ss';
+
+  useEffect(() => {
+    setEventTitle(event.title);
+    setEventStart(event.start);
+    setEventEnd(event.end)
+  }, [event])
+
   const update = async (id) => {
     setUpdating(true)
-    await updateEvent(id, new Date(eventStart), new Date(eventEnd),
-        eventName).catch((e) => {
+    const start = new Date(eventStart);
+    const end = new Date(eventEnd);
+
+    let updateResponse =  await updateEvent(id, start, end,
+        eventTitle).catch((e) => {
       errAlert(e.toString());
     });
     setUpdating(false);
     isUpdateModalOpen(false);
-    onEventUpdate(eventStart);
+    onEventUpdate({_id:id,start,end,title:eventTitle});
 
   }
 
   function updateDisabled() {
-    return isEmpty(eventName) || isUndefined(eventStart)
+    return isEmpty(eventTitle) || isUndefined(eventStart)
         || isUndefined(
             eventEnd);
   }
@@ -55,15 +66,15 @@ export const UpdateEventModal = ({
              ]}
       >
         <Space>
-          <RangePicker showTime onChange={(e) => updateRange(e)}
-                       defaultValue={[moment(new Date(eventStart),
-                           dateFormat),
-                         moment(new Date(eventEnd), dateFormat)]}
-                       format={dateFormat}/>
+          {showRange && <RangePicker showTime onChange={(e) => updateRange(e)}
+                                     defaultValue={[moment(new Date(eventStart),
+                                         dateFormat),
+                                       moment(new Date(eventEnd), dateFormat)]}
+                                     format={dateFormat}/>}
           <Divider plain/>
           <Input placeholder="Event description"
-                 value={eventName}
-                 onChange={(e) => setEventName(e.target.value)}/>
+                 value={eventTitle}
+                 onChange={(e) => setEventTitle(e.target.value)}/>
         </Space>
       </Modal>
 
